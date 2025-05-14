@@ -16,35 +16,33 @@ spec:
         wordpressEmail: user@example.com
         wordpressBlogName: "My WordPress"
 
-        ## Reduce resources for Autopilot
+        ## WordPress app resource overrides
         resources:
           limits:
             cpu: 500m
-            memory: 512Mi
+            memory: 1Gi
           requests:
             cpu: 250m
-            memory: 256Mi
+            memory: 512Mi     # ← bumped from 256Mi
 
         ## Disable persistence to avoid PVC issues
         persistence:
           enabled: false
 
+        
         mariadb:
-          auth:
-            rootPassword: myrootpassword
-            database: bitnami_wordpress
-            username: bn_wordpress
-            password: bitnami123
           resources:
             limits:
               cpu: 500m
-              memory: 512Mi
+              memory: 1Gi
             requests:
               cpu: 250m
-              memory: 256Mi
+              memory: 512Mi   # ← ensure it's ≥512Mi
           primary:
             persistence:
               enabled: false
+        persistence:
+          enabled: false
   destination:
     server: https://kubernetes.default.svc
     namespace: wordpress
