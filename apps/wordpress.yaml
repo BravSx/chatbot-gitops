@@ -11,19 +11,30 @@ spec:
     targetRevision: "18.0.0"
     helm:
       values: |
+        ## Service and persistence as before…
         service:
           type: ClusterIP
         persistence:
           enabled: false
 
-        # ↓ Resource requests & limits tuned for a single-node Autopilot cluster
+        ## Override resources for Autopilot
         resources:
-          requests:
-            cpu: 50m
-            memory: 128Mi
           limits:
-            cpu: 100m
-            memory: 256Mi
+            cpu: 500m
+            memory: 1Gi
+          requests:
+            cpu: 250m
+            memory: 512Mi
+
+        ## MariaDB subchart override
+        mariadb:
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 250m
+              memory: 512Mi
 
   destination:
     server: https://kubernetes.default.svc
