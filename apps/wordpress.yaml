@@ -11,31 +11,40 @@ spec:
     targetRevision: "18.0.0"
     helm:
       values: |
-        ## Service and persistence as before…
-        service:
-          type: ClusterIP
-        persistence:
-          enabled: false
+        wordpressUsername: user
+        wordpressPassword: bitnami123
+        wordpressEmail: user@example.com
+        wordpressBlogName: "My WordPress"
 
-        ## Override resources for Autopilot
+        ## Reduce resources for Autopilot
         resources:
           limits:
             cpu: 500m
-            memory: 1Gi
+            memory: 512Mi
           requests:
             cpu: 250m
-            memory: 512Mi
+            memory: 256Mi
 
-        ## MariaDB subchart override
+        ## Disable persistence to avoid PVC issues
+        persistence:
+          enabled: false
+
         mariadb:
+          auth:
+            rootPassword: myrootpassword
+            database: bitnami_wordpress
+            username: bn_wordpress
+            password: bitnami123
           resources:
             limits:
               cpu: 500m
-              memory: 1Gi
+              memory: 512Mi
             requests:
               cpu: 250m
-              memory: 512Mi
-
+              memory: 256Mi
+          primary:
+            persistence:
+              enabled: false
   destination:
     server: https://kubernetes.default.svc
     namespace: wordpress
