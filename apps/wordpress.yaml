@@ -44,7 +44,7 @@ spec:
         persistence:
           enabled: false
   destination:
-    server: https://kubernetes.default.svc
+    name: gke_cloudproject7x_europe-central2-b_standard-cluster
     namespace: wordpress
   syncPolicy:
     automated:
