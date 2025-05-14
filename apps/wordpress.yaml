@@ -15,6 +15,16 @@ spec:
           type: ClusterIP
         persistence:
           enabled: false
+
+        # ↓ Resource requests & limits tuned for a single-node Autopilot cluster
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+          limits:
+            cpu: 200m
+            memory: 512Mi
+
   destination:
     server: https://kubernetes.default.svc
     namespace: wordpress
