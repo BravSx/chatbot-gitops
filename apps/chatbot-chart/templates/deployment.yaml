@@ -4,24 +4,24 @@ Full Deployment for chatbot-app, with optional PVC mount for model cache.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "chatbot-chart.fullname" . }}
+  name: {{ include "chatbot-app.fullname" . }}
   labels:
-    {{- include "chatbot-chart.labels" . | nindent 4 }}
+    {{- include "chatbot-app.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "chatbot-chart.selectorLabels" . | nindent 6 }}
+      {{- include "chatbot-app.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "chatbot-chart.labels" . | nindent 8 }}
+        {{- include "chatbot-app.labels" . | nindent 8 }}
       {{- with .Values.podAnnotations }}
       annotations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
     spec:
-      serviceAccountName: {{ include "chatbot-chart.serviceAccountName" . }}
+      serviceAccountName: {{ include "chatbot-app.serviceAccountName" . }}
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
@@ -34,15 +34,21 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
+          {{- with .Values.livenessProbe }}
           livenessProbe:
-            {{- toYaml .Values.livenessProbe | nindent 12 }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.readinessProbe }}
           readinessProbe:
-            {{- toYaml .Values.readinessProbe | nindent 12 }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.resources }}
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           {{- if .Values.volumeMounts }}
           volumeMounts:
-            {{- toYaml .Values.volumeMounts | nindent 12 }}
+            {{- toYaml . | nindent 12 }}
           {{- end }}
       {{- if .Values.volumes }}
       volumes:
