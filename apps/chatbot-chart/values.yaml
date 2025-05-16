@@ -9,7 +9,7 @@ replicaCount: 1
 image:
   repository: gcr.io/cloudproject7x/chatbot-app
   # Overrides the image tag whose default is the chart appVersion.
-  tag: v3
+  tag: v7
   # This sets the pull policy for images.
   pullPolicy: Always
 
