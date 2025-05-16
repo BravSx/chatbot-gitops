@@ -4,7 +4,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: model-pvc
   labels:
-    app: {{ include "chatbot-chart.fullname" . }}
+    app: {{ include "chatbot-app.fullname" . }}
 spec:
   accessModes:
     - ReadWriteOnce
