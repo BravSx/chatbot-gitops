@@ -1,0 +1,16 @@
+image:
+  repository: gcr.io/cloudproject7x/chatbot-app
+  tag: v1
+  pullPolicy: Always
+
+service:
+  port: 80
+  targetPort: 5000
+  type: ClusterIP
+
+ingress:
+  enabled: true
+  className: nginx
+  host: chatbot.your-domain.com
+  path: /
+  pathType: Prefix
