@@ -9,9 +9,9 @@ spec:
     repoURL: https://charts.bitnami.com/bitnami
     chart: wordpress
     targetRevision: "18.0.0"
-    valueFiles:
-      apps/wordpress/wordpress-values.yaml
     helm:
+      valueFiles:
+        - apps/wordpress/wordpress-values.yaml
       values: |
         ## WordPress credentials
         wordpressUsername: user
