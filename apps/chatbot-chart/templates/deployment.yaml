@@ -34,3 +34,6 @@ spec:
               port: {{ .Values.service.targetPort }}
             initialDelaySeconds: 60
             periodSeconds: 10
+
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
