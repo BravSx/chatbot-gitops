@@ -10,8 +10,6 @@ spec:
     chart: wordpress
     targetRevision: "18.0.0"
     helm:
-      valueFiles:
-        - apps/wordpress/wordpress-values.yaml
       values: |
         ## WordPress credentials
         wordpressUsername: user
@@ -49,6 +47,17 @@ spec:
           primary:
             persistence:
               enabled: false
+
+        service:
+          type: ClusterIP
+
+        ingress:
+          enabled: true
+          ingressClassName: nginx
+          hostname: wordpress.local
+          path: /
+          pathType: Prefix
+
   destination:
     name: gke_cloudproject7x_europe-central2-b_standard-cluster
     namespace: wordpress
