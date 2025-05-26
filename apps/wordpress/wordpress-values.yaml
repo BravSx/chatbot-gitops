@@ -1,0 +1,9 @@
+
+service:
+  type: ClusterIP           
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  hostname: wordpress.local
+  path: /
+  pathType: Prefix
