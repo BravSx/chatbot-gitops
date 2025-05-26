@@ -1,6 +1,6 @@
 image:
   repository: gcr.io/cloudproject7x/chatbot-app
-  tag: v3
+  tag: v6
   pullPolicy: Always
 
 service:
