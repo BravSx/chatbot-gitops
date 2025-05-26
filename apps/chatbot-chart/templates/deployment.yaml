@@ -21,14 +21,6 @@ spec:
           ports:
             - containerPort: {{ .Values.service.targetPort }}
 
-          # Give the container time to download the GPT-2 model
-          startupProbe:
-            httpGet:
-              path: /
-              port: {{ .Values.service.targetPort }}
-            failureThreshold: 60
-            periodSeconds: 5
-
           livenessProbe:
             httpGet:
               path: /
