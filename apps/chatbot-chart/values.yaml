@@ -1,6 +1,6 @@
 image:
   repository: gcr.io/cloudproject7x/chatbot-app
-  tag: v11
+  tag: v18
   pullPolicy: Always
 
 service:
@@ -23,20 +23,16 @@ resources:
     cpu: 250m
     memory: 256Mi
 
-readinessProbe:
-  httpGet:
-    path: /healthz
-    port: 5000
-  initialDelaySeconds: 5
-  periodSeconds: 10
-  timeoutSeconds: 3
-  failureThreshold: 3
-
 livenessProbe:
   httpGet:
-    path: /healthz
+    path: /
     port: 5000
-  initialDelaySeconds: 15
-  periodSeconds: 20
-  timeoutSeconds: 5
-  failureThreshold: 5
+  initialDelaySeconds: 30
+  periodSeconds: 10
+
+readinessProbe:
+  httpGet:
+    path: /
+    port: 5000
+  initialDelaySeconds: 20
+  periodSeconds: 10
