@@ -59,7 +59,7 @@ spec:
           pathType: Prefix
 
   destination:
-    name: gke_cloudproject7x_europe-central2-b_standard-cluster
+    server: https://kubernetes.default.svc
     namespace: wordpress
   syncPolicy:
     automated:
