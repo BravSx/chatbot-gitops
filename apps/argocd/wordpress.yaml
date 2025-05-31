@@ -5,6 +5,7 @@ metadata:
   namespace: argocd
 spec:
   project: default
+
   source:
     repoURL: https://charts.bitnami.com/bitnami
     chart: wordpress
@@ -58,9 +59,12 @@ spec:
           path: /
           pathType: Prefix
 
+  # ─────────────── Replace the “name:” field with “server:” ───────────────
   destination:
     server: https://kubernetes.default.svc
     namespace: wordpress
+  # ────────────────────────────────────────────────────────────────────────
+
   syncPolicy:
     automated:
       prune: true
