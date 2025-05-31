@@ -1,7 +1,8 @@
 image:
-  repository: gcr.io/cloudproject7x/chatbot-app
+  repository: gcr.io/cloudproject3-bartek/chatbot-app
   tag: echo-v4
   pullPolicy: Always
+
 
 service:
   port: 80
